@@ -24,3 +24,27 @@ resolve({position, delay})
         }, delay)
   })
 }
+
+
+function onFormSubmit(event) {
+  event.preventDefault()  
+  
+let delay = Number(inputDelay.value)
+let amountNumber = Number(amount.value)
+let stepDelay = Number(step.value)
+
+
+    for (let i = 1; i <= amountNumber; i += 1) {
+ 
+    createPromise(i, delay)
+  .then(({ position, delay }) => {
+   Notiflix.Notify.warning(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  })
+  .catch(({ position, delay }) => {
+    Notiflix.Notify.warning(`❌ Rejected promise ${position} in ${delay}ms`);
+  })
+
+     delay += stepDelay 
+}
+
+}
